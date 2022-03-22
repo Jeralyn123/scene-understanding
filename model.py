@@ -102,9 +102,8 @@ class PlaceNet(nn.Module):
         self.relu4 = nn.ReLU(inplace=True)
         self.conv5 = nn.Conv2d (384, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=2)
         self.relu5 = nn.ReLU(inplace=True)
-        self.conv6 = nn.Conv2d (256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=2)
-        self.relu6 = nn.ReLU(inplace=True)
-        self.pool6 = nn.MaxPool2d(kernel_size=(3, 3), stride=(2, 2), dilation=(1, 1))
+        self.relu5 = nn.ReLU(inplace=True)
+        self.pool5 = nn.MaxPool2d(kernel_size=(3, 3), stride=(2, 2), dilation=(1, 1))
         self.fc7_new = nn.Linear(in_features=9216, out_features=4096)
         self.relu7 = nn.ReLU(inplace=True)
         self.drop7 = nn.Dropout(p=0.5, inplace=True)
@@ -126,9 +125,7 @@ class PlaceNet(nn.Module):
         x = self.relu4(x)
         x = self.conv5(x)
         x = self.relu5(x)
-        x = self.conv6(x)
-        x = self.relu6(x)
-        x = self.pool6(x)
+        x = self.pool5(x)
         x = x.view(x.size(0), 256 * 6 * 6)
         return x
 
